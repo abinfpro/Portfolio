@@ -84,6 +84,8 @@ const Experience = () => {
                       "Node.js", 
                       "Express.js",
                       "MongoDB",
+                      "sql",
+                      "Bootstrap",
                       "JavaScript",
                       "HTML/CSS",
                       "Git",

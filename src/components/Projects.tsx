@@ -5,6 +5,20 @@ import { ExternalLink, Github, MessageSquare, ShoppingCart, Users, FileText, Glo
 
 const Projects = () => {
   const projects = [
+     {
+      title: "Blog.ai",
+      description: "Blog.ai is a full-stack blogging platform built with React, Node.js, Express, and MongoDB, featuring user and admin panels with blog CRUD operations. It integrates third-party APIs and OpenAI to auto-generate blog content and images.",
+      tech: ["React", "Node.js", "Express", "MongoDB", "third party Api"],
+      features: [
+        "Fully responsive form design",
+        "Input validation",
+        "Bootstrap grid system",
+        "Mobile-friendly design",
+      ],
+      icon: <Layout className="w-8 h-8" />,
+      color: "from-pink-400 to-pink-600",
+      github: "https://github.com/abinfpro/Blog.ai"
+    },
     {
       title: "Blogging and Chat App",
       description: "A visually interactive blogging platform with role-based authentication and real-time communication features.",
@@ -18,7 +32,8 @@ const Projects = () => {
       ],
       icon: <MessageSquare className="w-8 h-8" />,
       color: "from-blue-400 to-blue-600",
-      deployment: "Deployed on Render"
+      deployment: "Deployed on Render",
+      github: "https://github.com/abinfpro/chatapp-Node"
     },
     {
       title: "E-Commerce Web Application",
@@ -34,7 +49,8 @@ const Projects = () => {
       ],
       icon: <ShoppingCart className="w-8 h-8" />,
       color: "from-green-400 to-green-600",
-      liveLink: true
+      liveLink: true,
+      github: "https://github.com/abinfpro/E-Commerce"
     },
     {
       title: "Employee Management System",
@@ -47,10 +63,11 @@ const Projects = () => {
         "Efficient data management"
       ],
       icon: <Users className="w-8 h-8" />,
-      color: "from-purple-400 to-purple-600"
+      color: "from-purple-400 to-purple-600",
+      github: "https://github.com/abinfpro/Employee-management-system-js"
     },
     {
-      title: "Static Responsive Webpage",
+      title: "Responsive Webpage",
       description: "A fully responsive static webpage ensuring compatibility across different devices.",
       tech: ["HTML", "CSS"],
       features: [
@@ -60,7 +77,8 @@ const Projects = () => {
         "Intuitive user experience"
       ],
       icon: <Globe className="w-8 h-8" />,
-      color: "from-orange-400 to-orange-600"
+      color: "from-orange-400 to-orange-600",
+      github: "https://github.com/abinfpro/Responsive-web-design-1"
     },
     {
       title: "Bootstrap Form",
@@ -73,8 +91,10 @@ const Projects = () => {
         "Mobile-friendly design"
       ],
       icon: <Layout className="w-8 h-8" />,
-      color: "from-pink-400 to-pink-600"
-    }
+      color: "from-pink-400 to-pink-600",
+      github: "https://github.com/abinfpro/bootstrap-form"
+    },
+    
   ];
 
   return (
@@ -150,7 +170,9 @@ const Projects = () => {
 
                   {/* Action Buttons */}
                   <div className="flex gap-3 pt-4">
+                    {project.github && (
                     <Button
+                    onClick={()=>window.open(`${project.github}`)}
                       variant="outline"
                       size="sm"
                       className="flex-1 border-pulse-500 text-pulse-500 hover:bg-pulse-500 hover:text-white"
@@ -158,8 +180,10 @@ const Projects = () => {
                       <Github className="w-4 h-4 mr-2" />
                       Code
                     </Button>
+                    )}
                     {project.liveLink && (
                       <Button
+                      onClick={()=>window.open("https://e-commerce-1-cdo9.onrender.com/")}
                         size="sm"
                         className="flex-1 bg-pulse-500 hover:bg-pulse-600 text-white"
                       >
@@ -179,8 +203,8 @@ const Projects = () => {
               variant="outline"
               size="lg"
               className="border-pulse-500 text-pulse-500 hover:bg-pulse-500 hover:text-white"
-            >
-              <Github className="w-5 h-5 mr-2" />
+            onClick={()=>window.open("https://github.com/abinfpro?tab=repositories")} >
+              {/* <Github className="w-5 h-5 mr-2" /> */}
               View All Projects on GitHub
             </Button>
           </div>

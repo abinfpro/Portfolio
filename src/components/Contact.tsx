@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "emailjs-com";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,10 +21,25 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+    try {
+      const result = await emailjs.send(
+        import.meta.env.VITE_YOUR_SERVICE_ID,   // from EmailJS dashboard
+        import.meta.env.VITE_YOUR_TEMPLATE_ID,  // from EmailJS dashboard
+        formData,
+        import.meta.env.VITE_YOUR_PUBLIC_KEY    // from EmailJS account
+      );
+
+      console.log("✅ Success:", result.text);
+      alert("Message sent successfully!");
+
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error("❌ Error:", error.text || error);
+      alert("Failed to send message. Please try again.");
+    }
+
   };
 
   const contactInfo = [
@@ -31,7 +47,7 @@ const Contact = () => {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
       value: "abinkummil@gmail.com",
-      href: "mailto:abinkummil@gmail.com",
+      href: "https://mail.google.com/mail/u/1/#inbox?compose=new",
       color: "from-blue-400 to-blue-600"
     },
     {
@@ -54,13 +70,13 @@ const Contact = () => {
     {
       icon: <Github className="w-6 h-6" />,
       title: "GitHub",
-      href: "#",
+      href: "https://github.com/abinfpro",
       color: "hover:text-gray-900"
     },
     {
       icon: <Linkedin className="w-6 h-6" />,
       title: "LinkedIn",
-      href: "#",
+      href: "https://www.linkedin.com/in/abin-f-709b8132a/",
       color: "hover:text-blue-600"
     }
   ];
@@ -99,6 +115,7 @@ const Contact = () => {
                   <a
                     key={index}
                     href={info.href}
+                    target="_blank"
                     className="flex items-center gap-4 p-4 rounded-lg hover:bg-white transition-colors duration-300 group"
                   >
                     <div className={`p-3 rounded-lg bg-gradient-to-r ${info.color} text-white group-hover:scale-110 transition-transform duration-300`}>
@@ -116,16 +133,8 @@ const Contact = () => {
               <div>
                 <h4 className="font-semibold text-gray-900 mb-4">Follow Me</h4>
                 <div className="flex gap-4">
-                  {socialLinks.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      className={`p-3 bg-white rounded-lg shadow-sm text-gray-600 ${social.color} transition-all duration-300 hover:scale-110 hover:shadow-md`}
-                      aria-label={social.title}
-                    >
-                      {social.icon}
-                    </a>
-                  ))}
+                  <button onClick={()=>window.open("https://www.linkedin.com/in/abin-f-709b8132a/")} className="hover:text-gray-900 p-3 bg-white rounded-lg shadow-sm text-gray-600 ${social.color} transition-all duration-300 hover:scale-110 hover:shadow-md" ><Linkedin className="w-6 h-6" /></button>
+                  <button onClick={()=>window.open("https://github.com/abinfpro")} className="hover:text-gray-900 p-3 bg-white rounded-lg shadow-sm text-gray-600 ${social.color} transition-all duration-300 hover:scale-110 hover:shadow-md" ><Github className="w-6 h-6" /></button>
                 </div>
               </div>
             </div>
@@ -226,6 +235,7 @@ const Contact = () => {
                 Let's discuss how we can bring your ideas to life!
               </p>
               <Button
+              onClick={()=>window.open("https://mail.google.com/mail/u/1/#inbox?compose=new")}
                 variant="outline"
                 size="lg"
                 className="border-white text-white hover:bg-white hover:text-pulse-600 transition-all duration-300"

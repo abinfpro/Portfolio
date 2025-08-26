@@ -52,41 +52,35 @@ const Hero = () => {
             </div>
             <div className="flex items-center gap-2 text-gray-600">
               <Mail className="w-5 h-5 text-pulse-500" />
-              <span>abinkummil@gmail.com</span>
+              <a href="https://mail.google.com/mail/u/1/#inbox?compose=new" target="_blank">abinkummil@gmail.com</a>
             </div>
           </div>
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 animate-fade-in">
-            <Button 
-              size="lg" 
-              className="bg-pulse-500 hover:bg-pulse-600 text-white shadow-elegant hover:shadow-elegant-hover transition-all duration-300 group"
-            >
-              <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
-              Download Resume
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-pulse-500 text-pulse-500 hover:bg-pulse-500 hover:text-white transition-all duration-300"
-            >
-              <ExternalLink className="w-5 h-5 mr-2" />
-              View Projects
-            </Button>
+         <Button 
+  size="lg" 
+  onClick={() => window.open("https://miocoodtteidyiubfkrd.supabase.co/storage/v1/object/public/Blog.ai_bucket/1756211692867-Abin%20F%20MERN%20Stack%20Developer%20.pdf.pdf", "_blank")}
+  className="bg-pulse-500 hover:bg-pulse-600 text-white shadow-elegant hover:shadow-elegant-hover transition-all duration-300 group"
+>
+  View Resume
+</Button>
+
           </div>
 
           {/* Social Links */}
           <div className="flex justify-center space-x-6 animate-fade-in">
             <a 
-              href="#" 
+              href="https://www.linkedin.com/in/abin-f-709b8132a/" 
+              target="_blank"
               className="text-gray-600 hover:text-pulse-500 transition-colors duration-300 transform hover:scale-110"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="w-8 h-8" />
             </a>
             <a 
-              href="#" 
+              href="https://github.com/abinfpro" 
+              target="_blank"
               className="text-gray-600 hover:text-pulse-500 transition-colors duration-300 transform hover:scale-110"
               aria-label="GitHub Profile"
             >

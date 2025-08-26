@@ -54,11 +54,12 @@ const Navbar = () => {
           }}
           aria-label="Pulse Robot"
         >
-          <img 
+          {/* <img 
             src="/logo.svg" 
             alt="Pulse Robot Logo" 
             className="h-7 sm:h-8" 
-          />
+          /> */}
+          <p className="h-7 sm:h-8">MERN STACK DEVELOPER</p>
         </a>
 
         {/* Desktop Navigation */}

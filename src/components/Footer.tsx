@@ -19,15 +19,9 @@ const Footer = () => {
               that make a difference. Always ready for new challenges and opportunities.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-pulse-400 transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-pulse-400 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="mailto:abinkummil@gmail.com" className="text-gray-400 hover:text-pulse-400 transition-colors">
-                <Mail className="w-5 h-5" />
-              </a>
+            <button onClick={()=>window.open("https://github.com/abinfpro")} className="text-gray-400 hover:text-pulse-400 transition-colors"><Github className="w-5 h-5" /></button>
+            <button onClick={()=>window.open("https://www.linkedin.com/in/abin-f-709b8132a/")} className="text-gray-400 hover:text-pulse-400 transition-colors"><Linkedin className="w-5 h-5" /></button>
+            <button onClick={()=>window.open("https://mail.google.com/mail/u/1/#inbox?compose=new")} className="text-gray-400 hover:text-pulse-400 transition-colors"><Mail className="w-5 h-5" /></button>
             </div>
           </div>
 
@@ -60,9 +54,6 @@ const Footer = () => {
         <hr className="border-gray-800 my-8" />
 
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-400 text-sm flex items-center gap-2">
-            © 2024 Abin F. Made with <Heart className="w-4 h-4 text-red-500" /> using React & Tailwind CSS
-          </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <span className="text-gray-400 text-sm">Currently open to opportunities</span>
           </div>
