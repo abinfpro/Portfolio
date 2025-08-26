@@ -1,183 +1,107 @@
-
-import React, { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
-import LottieAnimation from "./LottieAnimation";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Download, ExternalLink, Github, Linkedin, Mail, Phone } from "lucide-react";
 
 const Hero = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-  const [lottieData, setLottieData] = useState<any>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Check if mobile on mount and when window resizes
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    fetch('/loop-header.lottie')
-      .then(response => response.json())
-      .then(data => setLottieData(data))
-      .catch(error => console.error("Error loading Lottie animation:", error));
-  }, []);
-
-  useEffect(() => {
-    // Skip effect on mobile
-    if (isMobile) return;
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current || !imageRef.current) return;
-      
-      const {
-        left,
-        top,
-        width,
-        height
-      } = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - left) / width - 0.5;
-      const y = (e.clientY - top) / height - 0.5;
-
-      imageRef.current.style.transform = `perspective(1000px) rotateY(${x * 2.5}deg) rotateX(${-y * 2.5}deg) scale3d(1.02, 1.02, 1.02)`;
-    };
-    
-    const handleMouseLeave = () => {
-      if (!imageRef.current) return;
-      imageRef.current.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)`;
-    };
-    
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener("mousemove", handleMouseMove);
-      container.addEventListener("mouseleave", handleMouseLeave);
-    }
-    
-    return () => {
-      if (container) {
-        container.removeEventListener("mousemove", handleMouseMove);
-        container.removeEventListener("mouseleave", handleMouseLeave);
-      }
-    };
-  }, [isMobile]);
-  
-  useEffect(() => {
-    // Skip parallax on mobile
-    if (isMobile) return;
-    
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const elements = document.querySelectorAll('.parallax');
-      elements.forEach(el => {
-        const element = el as HTMLElement;
-        const speed = parseFloat(element.dataset.speed || '0.1');
-        const yPos = -scrollY * speed;
-        element.style.setProperty('--parallax-y', `${yPos}px`);
-      });
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile]);
-  
   return (
-    <section 
-      className="overflow-hidden relative bg-cover" 
-      id="hero" 
-      style={{
-        backgroundImage: 'url("/Header-background.webp")',
-        backgroundPosition: 'center 30%', 
-        padding: isMobile ? '100px 12px 40px' : '120px 20px 60px'
-      }}
-    >
-      <div className="absolute -top-[10%] -right-[5%] w-1/2 h-[70%] bg-pulse-gradient opacity-20 blur-3xl rounded-full"></div>
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-pulse-50 to-pulse-100 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[url('/hero-image.jpg')] bg-cover bg-center opacity-10"></div>
       
-      <div className="container px-4 sm:px-6 lg:px-8" ref={containerRef}>
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
-          <div className="w-full lg:w-1/2">
-            <div 
-              className="pulse-chip mb-3 sm:mb-6 opacity-0 animate-fade-in" 
-              style={{ animationDelay: "0.1s" }}
-            >
-              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white mr-2">01</span>
-              <span>Purpose</span>
+      {/* Floating Elements */}
+      <div className="absolute top-20 left-10 w-16 h-16 bg-pulse-200 rounded-full animate-float opacity-60"></div>
+      <div className="absolute bottom-20 right-10 w-24 h-24 bg-pulse-300 rounded-full animate-float opacity-40" style={{ animationDelay: "2s" }}></div>
+      <div className="absolute top-1/3 right-20 w-12 h-12 bg-pulse-400 rounded-full animate-float opacity-50" style={{ animationDelay: "1s" }}></div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div className="max-w-4xl mx-auto">
+          {/* Profile Image */}
+          <div className="mb-8 animate-fade-in">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto rounded-full bg-gradient-to-br from-pulse-400 to-pulse-600 p-1 shadow-elegant">
+              <div className="w-full h-full rounded-full bg-white flex items-center justify-center text-4xl sm:text-5xl font-bold text-pulse-600">
+                AF
+              </div>
             </div>
-            
-            <h1 
-              className="section-title text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight opacity-0 animate-fade-in" 
-              style={{ animationDelay: "0.3s" }}
-            >
-              Atlas: Where Code<br className="hidden sm:inline" />Meets Motion
-            </h1>
-            
-            <p 
-              style={{ animationDelay: "0.5s" }} 
-              className="section-subtitle mt-3 sm:mt-6 mb-4 sm:mb-8 leading-relaxed opacity-0 animate-fade-in text-gray-950 font-normal text-base sm:text-lg text-left"
-            >
-              The humanoid companion that learns and adapts alongside you.
-            </p>
-            
-            <div 
-              className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in" 
-              style={{ animationDelay: "0.7s" }}
-            >
-              <a 
-                href="#get-access" 
-                className="flex items-center justify-center group w-full sm:w-auto text-center" 
-                style={{
-                  backgroundColor: '#FE5C02',
-                  borderRadius: '1440px',
-                  boxSizing: 'border-box',
-                  color: '#FFFFFF',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  padding: '16px 24px', // Slightly reduced padding for mobile
-                  border: '1px solid white',
-                }}
-              >
-                Request Access
-                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
+          </div>
+
+          {/* Main Heading */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 animate-fade-in">
+            Hi, I'm{" "}
+            <span className="bg-gradient-to-r from-pulse-500 to-pulse-700 bg-clip-text text-transparent">
+              Abin F
+            </span>
+          </h1>
+          
+          {/* Subtitle */}
+          <p className="text-xl sm:text-2xl md:text-3xl text-gray-700 mb-4 animate-fade-in font-medium">
+            MERN Stack Developer
+          </p>
+          
+          {/* Description */}
+          <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in">
+            A dedicated and passionate full-stack developer with extensive hands-on experience 
+            in building modern web applications. I specialize in creating scalable, user-friendly 
+            solutions using the latest technologies.
+          </p>
+
+          {/* Contact Info */}
+          <div className="flex flex-wrap justify-center gap-4 mb-8 animate-fade-in">
+            <div className="flex items-center gap-2 text-gray-600">
+              <Phone className="w-5 h-5 text-pulse-500" />
+              <span>7356384946</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-600">
+              <Mail className="w-5 h-5 text-pulse-500" />
+              <span>abinkummil@gmail.com</span>
             </div>
           </div>
           
-          <div className="w-full lg:w-1/2 relative mt-6 lg:mt-0">
-            {lottieData ? (
-              <div className="relative z-10 animate-fade-in" style={{ animationDelay: "0.9s" }}>
-                <LottieAnimation 
-                  animationPath={lottieData} 
-                  className="w-full h-auto max-w-lg mx-auto"
-                  loop={true}
-                  autoplay={true}
-                />
-              </div>
-            ) : (
-              <>
-              <div className="absolute inset-0 bg-dark-900 rounded-2xl sm:rounded-3xl -z-10 shadow-xl"></div>
-              <div className="relative transition-all duration-500 ease-out overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl">
-                <img 
-                  ref={imageRef} 
-                  src="/lovable-uploads/5663820f-6c97-4492-9210-9eaa1a8dc415.png" 
-                  alt="Atlas Robot" 
-                  className="w-full h-auto object-cover transition-transform duration-500 ease-out" 
-                  style={{ transformStyle: 'preserve-3d' }} 
-                />
-                <div className="absolute inset-0" style={{ backgroundImage: 'url("/hero-image.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', mixBlendMode: 'overlay', opacity: 0.5 }}></div>
-              </div>
-              </>
-            )}
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 animate-fade-in">
+            <Button 
+              size="lg" 
+              className="bg-pulse-500 hover:bg-pulse-600 text-white shadow-elegant hover:shadow-elegant-hover transition-all duration-300 group"
+            >
+              <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+              Download Resume
+            </Button>
+            
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-pulse-500 text-pulse-500 hover:bg-pulse-500 hover:text-white transition-all duration-300"
+            >
+              <ExternalLink className="w-5 h-5 mr-2" />
+              View Projects
+            </Button>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex justify-center space-x-6 animate-fade-in">
+            <a 
+              href="#" 
+              className="text-gray-600 hover:text-pulse-500 transition-colors duration-300 transform hover:scale-110"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin className="w-8 h-8" />
+            </a>
+            <a 
+              href="#" 
+              className="text-gray-600 hover:text-pulse-500 transition-colors duration-300 transform hover:scale-110"
+              aria-label="GitHub Profile"
+            >
+              <Github className="w-8 h-8" />
+            </a>
           </div>
         </div>
       </div>
       
-      <div className="hidden lg:block absolute bottom-0 left-1/4 w-64 h-64 bg-pulse-100/30 rounded-full blur-3xl -z-10 parallax" data-speed="0.05"></div>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-pulse-400 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-pulse-400 rounded-full mt-2 animate-pulse"></div>
+        </div>
+      </div>
     </section>
   );
 };
