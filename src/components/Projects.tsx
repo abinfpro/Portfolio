@@ -49,7 +49,7 @@ const Projects = () => {
       ],
       icon: <ShoppingCart className="w-8 h-8" />,
       color: "from-green-400 to-green-600",
-      liveLink: true,
+      liveLink: "https://e-commerce-1-cdo9.onrender.com/",
       github: "https://github.com/abinfpro/E-Commerce"
     },
     {
@@ -78,7 +78,9 @@ const Projects = () => {
       ],
       icon: <Globe className="w-8 h-8" />,
       color: "from-orange-400 to-orange-600",
-      github: "https://github.com/abinfpro/Responsive-web-design-1"
+      // liveLink: true,
+      github: "https://github.com/abinfpro/Responsive-web-design-1",
+      liveLink:"https://responsive-web-design-1.onrender.com/"
     },
     {
       title: "Bootstrap Form",
@@ -183,7 +185,7 @@ const Projects = () => {
                     )}
                     {project.liveLink && (
                       <Button
-                      onClick={()=>window.open("https://e-commerce-1-cdo9.onrender.com/")}
+                      onClick={()=>window.open(`${project.liveLink}`)}
                         size="sm"
                         className="flex-1 bg-pulse-500 hover:bg-pulse-600 text-white"
                       >
