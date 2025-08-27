@@ -74,10 +74,10 @@ const Skills = () => {
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { skill: "JavaScript", level: 90 },
-                { skill: "React", level: 85 },
-                { skill: "Node.js", level: 80 },
-                { skill: "MongoDB", level: 75 }
+                { skill: "JavaScript", level: 95 },
+                { skill: "React", level: 93 },
+                { skill: "Node.js", level: 90 },
+                { skill: "MongoDB", level: 95 }
               ].map((item, index) => (
                 <div key={index} className="text-center">
                   <div className="mb-2 font-semibold text-gray-800">{item.skill}</div>
